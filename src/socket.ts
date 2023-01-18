@@ -12,7 +12,11 @@ let io: ServerType;
 export function init(httpServer: any) {
 	io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>(
 		httpServer,
-		{
+		{ 
+			cors: {
+			  origin: "*"
+			},
+		  
 			// @ts-ignore
 			method: 'GET',
 		}

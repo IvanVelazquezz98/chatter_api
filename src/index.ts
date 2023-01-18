@@ -5,7 +5,7 @@ import path from 'path';
 import uniqid from 'uniqid';
 import cors from 'cors';
 import { init } from './socket';
-
+import morgan from 'morgan'
 import userRoutes from './routes/user';
 import chatRoutes from './routes/chat';
 import notFoundRoutes from './routes/notFound';
@@ -29,6 +29,7 @@ const options: cors.CorsOptions = {
 };
 
 app.use(cors(options));
+app.use(morgan('dev'))
 
 const fileStorage = diskStorage({
 	destination: (req, file, callback) => {
@@ -70,6 +71,11 @@ const server = app.listen(port, () => {
 	console.log(`Listening on port ${port}...`);
 	const io = init(server);
 	io.on('connection', () => {
+			
 		console.log('Client connected!');
 	});
+	
 });
+
+
+
